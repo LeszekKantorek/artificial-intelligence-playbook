@@ -20,67 +20,59 @@ Traditional approaches try to close these gaps by demanding more information upf
 
 ---
 
-## Agents & Files
-
-Each agent in this process is a prompt instruction file that defines how an AI (or human) should behave in a given mode. They are used sequentially and in combination.
-
-| Agent | File | Role |
-|---|---|---|
-| **ExecutionPlan** | `execute-plan-instructions.md` | The living plan — captures intent, decisions, milestones, and acceptance criteria. Source of truth for the entire process. |
-| **BackbriefPlan** | `backbrief-plan-instructions.md` | Audits the plan against source material *before* execution. Surfaces confirmed knowledge, inferences, and dangerous assumptions. |
-| **AuditPlan** | `audit-plan-instructions.md` | Audits execution against the plan *after* each milestone. Verifies that actions are traceable to intent and that acceptance criteria are proven, not declared. |
-
----
-
 ## How to Use
 
-The process is milestone-driven. Each milestone is intentionally small — it generates progress *and* evidence, and acts as a probe into the fog of uncertainty.
+The process is milestone-driven. Each milestone follows the same three-phase loop.
 
-```
-1.  Author the ExecutionPlan
+    1. Author the ExecutionPlan using execution-plan-instructions.md
 
-2.  Run BackbriefPlan against ExecutionPlan + source documents
-2a. Resolve open assumptions — update ExecutionPlan accordingly
-2b. Repeat 2–2a until BackbriefPlan returns: READY FOR EXECUTION
+    For each milestone:
 
-3.  Execute Milestone 1
-3a. Produce Milestone Report 1 — an immutable record of what actually happened, with evidence
+    2. Milestone Backbrief — written to the conversation before touching anything.
+       States what will be done and on what basis (CONFIRMED / INFERRED / ASSUMED).
 
-4.  Run AuditPlan on Milestone Report 1
-4a. Resolve unjustified actions and unverified acceptance criteria
-4b. Repeat 4–4a until AuditPlan returns: MILESTONE CLOSED
+    3. Milestone Execution — execute the Concrete Steps in order.
+       Record decisions, discoveries, and blockers in the plan file as they occur.
 
-5.  Run BackbriefPlan before the next milestone
-5a. Update ExecutionPlan if context or intent has changed
-5b. Repeat until READY FOR EXECUTION
+    4. Milestone Audit — written to the conversation after all steps are complete.
+       Classifies each action (JUSTIFIED / UNJUSTIFIED / UNVERIFIED).
+       Updates the plan: milestone status → [CLOSED], living sections updated.
 
-6.  Execute next milestone → produce Milestone Report
+    5. Proceed to the next [OPEN] milestone. Repeat steps 2–4.
 
-7.  Run AuditPlan
+    6. When all milestones are [CLOSED], write Outcomes & Retrospective.
 
-    (Repeat steps 5–7 for each remaining milestone)
-
-8.  Write Outcomes & Retrospective in ExecutionPlan
-```
-
-**A note on Milestone Reports:** a Milestone Report is not a plan. It is a record. Once written, it does not change — it captures what was done, what was found, and what evidence exists. The AuditPlan uses this record to verify alignment with the ExecutionPlan.
+Milestone Backbrief and Milestone Audit are informational outputs — they do not block or gate execution. The principal reads them and decides whether to continue.
 
 ---
 
-## Principles
+## Getting Started
 
-Each step in the flow exists to close a specific gap before it becomes an error.
+Two files. One snippet.
 
-**BackbriefPlan closes the Knowledge Gap.** Before any execution begins, the BackbriefPlan audits the plan against its sources. It distinguishes between what is confirmed, what is inferred, and what is an assumption. If assumptions are dangerous or undocumented, the plan is updated before work starts.
+| File | Role |
+|---|---|
+| `execution-plan-instructions.md` | Instructions for authoring and executing an ExecutionPlan. Read this before creating or running any plan. |
+| `your-plan.md` | The ExecutionPlan you create for a specific piece of work. One file per task. |
 
-**AuditPlan closes the Effects Gap.** After each milestone, the AuditPlan checks whether what was done is traceable to what was intended. It does not evaluate whether execution was elegant or optimal — it checks for coherence between intent and reality, and requires evidence rather than declarations.
+Place `execution-plan-instructions.md` at `.agents/execution-plan-instructions.md`, then add this to your agent configuration file (`AGENTS.md`, `CLAUDE.md`, or `.github/copilot-instructions.md`):
 
-**Updating the ExecutionPlan closes the Alignment Gap.** Between milestones, the ExecutionPlan is updated to reflect new decisions, discoveries, and changes in context. This keeps intent, state, and understanding consistent as work progresses — and prevents the plan from becoming a historical artifact disconnected from the work it is supposed to guide.
+    ## ExecutionPlan
+
+    When working on any complex or multi-step task, use an ExecutionPlan as described
+    in `.agents/execution-plan-instructions.md` — read that file in full before starting,
+    and again if your context has been reset.
 
 ---
 
-## Philosophy
+## Why It Works
 
-This process does not eliminate friction. Friction is a property of complex environments, not a failure of planning. What the process does is make the gaps visible at each transition point — before execution, after each milestone, and between milestones — so that the people doing the work can close them with judgement rather than discovering them as failures.
+This process does not eliminate friction. Friction is a property of complex environments, not a failure of planning. What it does is make the three gaps visible at the right moment — so they can be closed with judgement before they become failures.
+
+**Milestone Backbrief closes the Knowledge Gap.** Before any action is taken, the agent states what it understands, what it is inferring, and what it is assuming. Invisible assumptions become visible choices.
+
+**Milestone Audit closes the Effects Gap.** After each milestone, the agent accounts for every action: whether it was directed by the plan, and whether acceptance criteria have evidence. Intent and reality are checked against each other — not optimism.
+
+**Updating the ExecutionPlan closes the Alignment Gap.** Every decision made during execution is recorded. The plan stays current with the actual state of the work. It must always be possible to restart from the file alone.
 
 The goal is not to follow the process. The goal is to achieve the outcome. The process is the means, not the end.
