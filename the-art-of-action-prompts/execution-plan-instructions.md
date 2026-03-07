@@ -13,8 +13,9 @@ and audit results are recorded here as work proceeds.
 ## How to Use an ExecutionPlan
 
 **When authoring:** start from the skeleton, embed the domain knowledge the executor needs,
-and resolve ambiguities inside the plan. For each Concrete Step, record the Basis and Risk
-if wrong. Unknowns that cannot be resolved go to Open Questions.
+and resolve ambiguities inside the plan. For each Concrete Step, complete Phase 1 —
+Authoring as defined in Executing a Milestone. Unknowns that cannot be resolved go to
+Open Questions.
 
 **When executing:** read the entire plan before acting. Follow the two-phase loop in
 Executing a Milestone. Keep living sections current. Any conclusion left only in chat
@@ -46,8 +47,9 @@ Read the full ExecutionPlan. For each Concrete Step in the milestone, write inli
 - `Risk if wrong:` required for INFERRED and ASSUMED; state the consequence if the basis
   proves incorrect. May be omitted for CONFIRMED.
 
-The completed steps constitute the Milestone Backbrief — written once before execution
-begins and immutable thereafter.
+The completed steps constitute the Milestone Backbrief. Once execution begins, they may
+only be edited if the underlying Concrete Step has changed — any such change must be
+recorded in the Decision Log.
 
 
 ### Phase 2 — Execution
