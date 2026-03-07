@@ -6,21 +6,17 @@ instructions the agent needs — no external context is assumed. If a fact, rule
 decision matters, it must be stated here or listed under Reference Materials.
 
 An ExecutionPlan is a living document. The file is the single source of truth for the
-state of the work at any point in time. Milestone statuses, decisions, and discoveries
-are recorded here as execution proceeds.
-
-Milestone Backbrief and Milestone Audit are structured outputs written to the conversation —
-one before execution begins, one after it ends. They have no file and leave no artifact.
-Their format is defined in Executing a Milestone below.
+state of the work at any point in time. Milestone statuses, decisions, discoveries,
+and audit results are recorded here as work proceeds.
 
 
 ## How to Use an ExecutionPlan
 
 **When authoring:** start from the skeleton, embed the domain knowledge the executor needs,
-and resolve ambiguities inside the plan. Unknowns that cannot be resolved go to Open
-Questions with a milestone assigned to answer them.
+and resolve ambiguities inside the plan. For each Concrete Step, record the Basis and Risk
+if wrong. Unknowns that cannot be resolved go to Open Questions.
 
-**When executing:** read the entire plan before acting. Follow the three-phase loop in
+**When executing:** read the entire plan before acting. Follow the two-phase loop in
 Executing a Milestone. Keep living sections current. Any conclusion left only in chat
 history is treated as lost.
 
@@ -30,60 +26,52 @@ remain restartable from the file alone at any point.
 
 ## Executing a Milestone
 
-Every milestone follows the same three-phase loop: Milestone Backbrief, Milestone
-Execution, Milestone Audit. Both Backbrief and Audit are informational outputs written
-to the conversation in the same language as the plan — they do not block or gate anything.
+Every milestone follows two phases: Authoring closes the Knowledge and Alignment Gaps
+before action; Execution closes the Effects Gap and verifies Alignment after.
 
 
-### Phase 1 — Milestone Backbrief
+### Phase 1 — Authoring
 
-Read the full ExecutionPlan, then write to the conversation:
+Read the full ExecutionPlan. For each Concrete Step in the milestone, write inline:
 
-**Milestone Backbrief — Milestone N: [title]**
+- A one-line description of the action.
+- `Expected outcome:` what success looks like; known failure conditions if any.
+- `Basis:` classify and support the action:
 
-Intention as understood: restate the overall Intention and how this milestone contributes
-to it. One to three sentences — a demonstration of understanding, not a copy-paste.
+        CONFIRMED — directly stated in the ExecutionPlan or a named Reference Material;
+                    provide a verbatim quote or section reference, not a paraphrase
+        INFERRED  — consistent with the plan but not stated directly; explain the reasoning
+        ASSUMED   — no basis in the plan; state what is unknown and what is taken as fact
 
-Constraints active for this milestone: list every boundary and anti-goal from Main Effort
-and Boundaries that applies here. State what each one protects.
+- `Risk if wrong:` required for INFERRED and ASSUMED; state the consequence if the basis
+  proves incorrect. May be omitted for CONFIRMED.
 
-What will be done and on what basis: describe the planned actions and classify each:
-
-    CONFIRMED — directly stated in the ExecutionPlan or a named Reference Material; cite the source
-    INFERRED  — consistent with the plan but not stated directly; explain the reasoning
-    ASSUMED   — no basis in the plan; state what is unknown and what is taken as fact
-
-
-### Phase 2 — Milestone Execution
-
-Execute the Concrete Steps in
-the order written, observing outcomes against the expected results stated in each step.
-
-Record unexpected findings in Surprises and Discoveries as they occur. If a decision not
-covered by the plan becomes necessary, record it immediately in the Decision Log with
-rationale and alternatives considered, then update any affected plan sections. If an Open
-Question is resolved, move the answer to Decision Log or Surprises and Discoveries.
-
-If a step fails in a way the plan did not anticipate, record the failure, decide how to
-proceed, record that decision in the Decision Log, and continue. If the milestone becomes
-uncompletable without a plan change, record the blocker in Open Questions and stop.
+The completed steps constitute the Milestone Backbrief — written once before execution
+begins and immutable thereafter.
 
 
-### Phase 3 — Milestone Audit
+### Phase 2 — Execution
 
-Write to the conversation:
+Execute the Concrete Steps in order, observing outcomes against each step's expected result.
 
-**Milestone Audit — Milestone N: [title]**
+Record unexpected findings in Surprises and Discoveries as they occur. If an unplanned
+decision becomes necessary, record it in the Decision Log with rationale and alternatives,
+then update affected plan sections. Resolved Open Questions move to Decision Log or
+Surprises and Discoveries.
 
-What was done and why — classify each significant action:
+If a step fails unexpectedly, record the failure and decision in the Decision Log and
+continue. If the milestone becomes uncompletable, record the blocker in Open Questions
+and stop.
 
-    JUSTIFIED   — directed by the ExecutionPlan or a Decision Log entry; cite the source
-    UNJUSTIFIED — no traceable basis in the plan and no decision recorded explaining why
-    UNVERIFIED  — an acceptance criterion has no corresponding evidence; state what is missing
+After all steps are complete, write the Milestone Audit to Outcomes and Retrospective.
+For each acceptance criterion state the verdict — PASS with attached evidence, FAIL with
+a required Decision Log entry or Open Question, or UNVERIFIED with an explanation of what
+is missing and why closing is still acceptable. Precede the criteria with a brief summary
+of what was achieved, any deviations, and issues discovered. Use the template in Outcomes
+and Retrospective.
 
 Then update the plan:
 - milestone heading status → [CLOSED YYYY-MM-DD HH:MMZ]
-- Outcomes and Retrospective → brief comparison of what was achieved against the milestone's purpose
 - Open Questions → remove resolved entries
 - Decision Log → ensure all execution decisions are recorded
 
@@ -93,9 +81,14 @@ Proceed to the next [OPEN] milestone.
 ## Requirements
 
 **The ExecutionPlan must be fully self-contained.** No external context is assumed.
+Anything outside the plan must be listed under Reference Materials; anything not listed
+there is treated as unavailable.
 
-**Anything outside the plan must be listed under Reference Materials.** Anything not
-listed there is treated as unavailable.
+**Closed milestones are immutable.** Once a milestone is marked [CLOSED], its description,
+Acceptance criteria, and Concrete Steps must not be edited. The only permitted writes after
+closing are additions to Decision Log, Surprises and Discoveries, and Outcomes and
+Retrospective. Editing a closed milestone's content is a plan violation equivalent to
+falsifying evidence.
 
 **Every non-obvious term must be defined in place.** Not in a glossary — at the point of use.
 
@@ -119,8 +112,9 @@ available or replaced by an exploratory milestone.
 ## File Format
 
 Write the ExecutionPlan as plain Markdown. Use prose by default; lists only when naming
-discrete items. Concrete Steps are numbered prose paragraphs — no sub-bullets. No fenced
-code blocks; use four-space indented blocks for excerpts and snippets.
+discrete items. Concrete Steps are numbered paragraphs; each step carries inline fields
+for Expected outcome, Basis, and Risk if wrong — indented, not bulleted. No fenced code
+blocks; use four-space indented blocks for excerpts and snippets.
 
 Heading levels: `#` plan title, `##` top-level sections, `###` milestones. Do not go
 deeper than `###`. Do not rename, reorder, or merge sections.
@@ -189,8 +183,9 @@ deeper than `###`. Do not rename, reorder, or merge sections.
 
     ### Milestone 1 — <title> [OPEN]
 
-    A short paragraph: what will exist at the end that did not exist before, what work
-    produces it, and what the executor must demonstrate to consider it closed.
+    A short paragraph: how this milestone advances the overall Intention. What will
+    exist at the end that did not exist before, what work produces it, and what the
+    executor must demonstrate to consider it closed.
 
     Acceptance criteria:
     - <Observable outcome, not internal state.>
@@ -198,10 +193,23 @@ deeper than `###`. Do not rename, reorder, or merge sections.
 
     Concrete Steps:
 
-    1. <What to do and where. Expected outcome: what success looks like. If the step
-       depends on a condition or can fail in a known way, describe it here.>
+    1. <What to do and where — one line.>
 
-    2. <Next step. Expected outcome: what to observe to confirm it worked.>
+       Expected outcome: <what success looks like; known failure conditions if any.>
+       Basis: CONFIRMED — "<verbatim quote or section reference>"
+       Risk if wrong: n/a
+
+    2. <What to do and where — one line.>
+
+       Expected outcome: <what success looks like; known failure conditions if any.>
+       Basis: INFERRED — <reasoning: why this follows from the plan even though not stated>
+       Risk if wrong: <consequence if the inference is wrong>
+
+    3. <What to do and where — one line.>
+
+       Expected outcome: <what success looks like; known failure conditions if any.>
+       Basis: ASSUMED — <what is unknown and what is taken as fact>
+       Risk if wrong: <consequence if the assumption is wrong>
 
 
     ### Milestone 2 — <title> [OPEN]
@@ -213,7 +221,11 @@ deeper than `###`. Do not rename, reorder, or merge sections.
 
     Concrete Steps:
 
-    1. …
+    1. <What to do and where — one line.>
+
+       Expected outcome: <what success looks like.>
+       Basis: CONFIRMED / INFERRED / ASSUMED — <support>
+       Risk if wrong: <consequence, or n/a for CONFIRMED>
 
 
     ## Validation and Acceptance
@@ -256,6 +268,37 @@ deeper than `###`. Do not rename, reorder, or merge sections.
 
     ## Outcomes and Retrospective
 
-    Written after each milestone closes and at the end of the full plan.
-    Compare what was achieved against the Intention. State what remains open and what
-    was learned.
+    Written after each milestone closes and again at the end of the full plan.
+
+
+    **Milestone Audit — Milestone N: [title]**
+
+    What was achieved: [one to three sentences — what now exists that did not before;
+    comparison against the milestone's stated purpose.]
+
+    Deviations: [Decision Log entries cited, or "none"]
+
+    Issues discovered: [Surprises and Discoveries entries cited, or "none"]
+
+    Acceptance criteria results:
+
+    - [Criterion text from Milestone N]: PASS
+      Evidence: [log output / file path / observable artifact / user confirmation]
+
+    - [Criterion text from Milestone N]: FAIL
+      Evidence: [what was observed]
+      Action taken: [Decision Log entry date / Open Question added]
+
+    - [Criterion text from Milestone N]: UNVERIFIED
+      What is missing: [what evidence would prove this criterion]
+      Why acceptable: [why the milestone may close without this evidence]
+
+
+    **Plan Retrospective**
+
+    Written once, after the final milestone closes.
+
+    Overall intention (restated): [...]
+    Achieved: [...]
+    Not achieved: [...]
+    Key learnings: [...]
