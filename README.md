@@ -39,4 +39,5 @@ This is a personal playbook, not a framework. Suggestions and issues are welcome
 
 ## 📄 License
 
-MIT — use freely, adapt ruthlessly, credit optionally.
+- **Content** (prompts, instructions, documentation) — [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) — use freely, adapt ruthlessly, credit required.
+- **Code** (scripts, tools) — [MIT](https://opensource.org/licenses/MIT) — use freely, no strings attached.
