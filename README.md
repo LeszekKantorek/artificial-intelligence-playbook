@@ -9,7 +9,7 @@
 
 | Folder | What's inside | Status |
 |---|---|---|
-| [`the-art-of-action-execution-plan/`](./the-art-of-action-execution-plan/) | Prompts and agent instructions built around Bungay's *The Art of Action* — knowledge gap, alignment gap, effects gap. Includes the ExecutionPlan framework with Milestone Backbrief and Audit phases. | 🟢 Active |
+| [`the-art-of-action-execution-plan/`](./the-art-of-action-execution-plan/) | Agent instructions built around Bungay's *The Art of Action* — knowledge gap, alignment gap, effects gap. Includes the ExecutionPlan framework with Milestone Backbrief and Audit phases. | 🟢 Active |
 
 ---
 
