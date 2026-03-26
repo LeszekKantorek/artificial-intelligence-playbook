@@ -1,7 +1,7 @@
 # Execution Plan (ExecutionPlan)
 
 An ExecutionPlan is a self-contained executable specification that an AI agent follows
-to deliver a defined outcome. It contains all knowledge, context, constraints, and
+to deliver a defined outcome. It contains all the knowledge, context, constraints, and
 instructions the agent needs — no external context is assumed. If a fact, rule, or
 decision matters, it must be stated here or listed under Reference Materials.
 
@@ -88,6 +88,9 @@ Proceed to the next [OPEN] milestone.
 Anything outside the plan must be listed under Reference Materials; anything not listed
 there is treated as unavailable.
 
+**Format must be taken exclusively from this instructions file.** Template is the source
+of truth for document structure, section names, and layout.
+
 **Closed milestones are immutable.** Once a milestone is marked [CLOSED], its description,
 Acceptance criteria, and Concrete Steps must not be edited. The only permitted writes after
 closing are additions to Decision Log, Surprises and Discoveries, and Outcomes and
@@ -137,7 +140,9 @@ sections.
     be updated as work proceeds. Milestone status is tracked in each milestone heading.
 
     This plan is governed by execution-plan-instructions.md. If that file is not in your
-    context, read it in full before proceeding.
+    context, read it in full before proceeding. Format must be taken exclusively from 
+    the instructions file, which is the sole source of truth for document structure, 
+    section names, and layout.
 
 
     ## Intentions
@@ -149,7 +154,8 @@ sections.
     ## Alignment and Autonomy
 
     Name the part of the work that, if it fails, makes everything else irrelevant. Then
-    state what must not be done, what is forbidden, what must not be compromised, and what is out of scope. Include anti-goals. 
+    state what must not be done, what is forbidden, what must not be compromised, and what 
+    is out of scope. Include anti-goals. 
 
     Autonomy: 
     - <name areas where initiative and independent judgement are expected — approach, tooling 
