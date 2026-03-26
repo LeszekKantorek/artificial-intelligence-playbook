@@ -1,7 +1,7 @@
 # Execution Plan (ExecutionPlan)
 
 An ExecutionPlan is a self-contained executable specification that an AI agent follows
-to deliver a defined outcome. It contains all the knowledge, context, constraints, and
+to deliver a defined outcome. It contains all knowledge, context, constraints, and
 instructions the agent needs — no external context is assumed. If a fact, rule, or
 decision matters, it must be stated here or listed under Reference Materials.
 
@@ -48,10 +48,13 @@ no blank line between the step and its bullets:
 - `Risk:` required for INFERRED and ASSUMED; state the consequence if the basis
   proves incorrect. May be omitted for CONFIRMED.
 
+For INFERRED steps, the Basis must not only state that the step is consistent with the
+plan, but explain which part of the plan makes the step necessary here and why it
+belongs at this point rather than elsewhere.
+
 The completed steps constitute the Milestone Backbrief. Once execution begins, they may
 only be edited if the underlying Concrete Step has changed — any such change must be
 recorded in the Decision Log.
-
 
 ### Phase 2 — Execution
 
@@ -114,9 +117,16 @@ Questions.
 **Deviations are allowed only when recorded.** A deviation without a Decision Log entry
 is a plan violation, not an exercise of judgement.
 
+**Deviations and Issues discovered default to "none".** Replace "none" with a bullet
+list only when there is something to record. Do not leave placeholder text in the
+document.
+
 **Missing reference materials are blockers.** Record in Open Questions and stop until
 available or replaced by an exploratory milestone.
 
+**Do not use Plan of Work for detailed justification.** Keep it as a terse summary of 
+sequence only. Put detailed justification of ordering and separation in Rationale and 
+in the milestone-specific WHY answers.
 
 ## File Format
 
@@ -140,26 +150,37 @@ sections.
     be updated as work proceeds. Milestone status is tracked in each milestone heading.
 
     This plan is governed by execution-plan-instructions.md. If that file is not in your
-    context, read it in full before proceeding. Format must be taken exclusively from 
-    the instructions file, which is the sole source of truth for document structure, 
-    section names, and layout.
+    context, read it in full before proceeding. 
+    
+    Format must be taken exclusively from the instructions file, which is the sole source 
+    of truth for document structure, section names, and layout.
 
 
     ## Intentions
 
-    Describe the desired end-state and why it matters. What will be true when this work
-    is done, and why that outcome is worth pursuing. Two to four sentences.
+    Describe the desired end-state. What will be true when this work is done, and why that
+    outcome matters at a high level. Two to four sentences. Detailed justification of the
+    problem framing, sequencing, and trade-offs belongs in `## Rationale`.
 
+    ## Rationale
 
+    State why this plan is structured this way. Write three to five sentences explaining why 
+    this problem framing was chosen over plausible alternatives, why the milestones are 
+    ordered this way, what would break if they were reordered or merged, and what assumption 
+    about the situation or working context makes this approach sound.
+
+    State what this plan does not optimize for. Name at least one accepted trade-off.
+      
     ## Alignment and Autonomy
 
     Name the part of the work that, if it fails, makes everything else irrelevant. Then
-    state what must not be done, what is forbidden, what must not be compromised, and what 
-    is out of scope. Include anti-goals. 
+    state what must not be done, what is forbidden, what must not be compromised, and what is
+	out of scope. Include anti-goals. 
 
     Autonomy: 
     - <name areas where initiative and independent judgement are expected — approach, tooling 
-      implementation order, error handling, and anything else the executor should own without asking.>
+      implementation order, error handling, and anything else the executor should own without 
+	  asking.>
 
 
     ## Context
@@ -191,9 +212,9 @@ sections.
 
     ## Plan of Work
 
-    1. <What to establish first and why this must come before everything else.>
-    2. <What to build next and why this order makes sense given what came before.>
-    3. <What to finish last and why this belongs at the end.>
+    1. <What to establish first.>
+    2. <What to build next.>
+    3. <What to finish last.>
 
 
     ## Milestones
@@ -206,9 +227,9 @@ sections.
 
     ### Milestone 1 — <title> [OPEN]
 
-    A short paragraph: how this milestone advances the overall Intentions. What will
-    exist at the end that did not exist before, what work produces it, and what the
-    executor must demonstrate to consider it closed.
+    Describe what will exist at the end that did not exist before, what work 
+    produces it, why this milestone stands alone, and what the executor must 
+    demonstrate to consider it closed.
 
     Acceptance criteria:
     - <Observable outcome, not internal state. State what evidence will prove this
@@ -236,7 +257,9 @@ sections.
 
     ### Milestone 2 — <title> [OPEN]
 
-    …
+    Describe what will exist at the end that did not exist before, what work 
+    produces it, why this milestone stands alone, and what the executor must 
+    demonstrate to consider it closed.
 
     Acceptance criteria:
     - <Observable outcome. State what evidence will prove this criterion.>
@@ -275,7 +298,6 @@ sections.
     ## Open Questions
 
     - Question: …
-      - Resolved by: …
       - Blocks: …
 
 
@@ -300,7 +322,7 @@ sections.
     Deviations: none
 
     Issues discovered: none
-
+	  
     Acceptance criteria results:
 
     - PASS: <Criterion text from Milestone N>
